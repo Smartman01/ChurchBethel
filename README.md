@@ -1,3 +1,3 @@
 # Church Website
 
-Made by Carl Antoine for Bethel
+Made by Carl Antoine for Bethel Baptise
