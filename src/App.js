@@ -4,6 +4,7 @@ import React, {useEffect} from 'react'
 import ReactLivestream from 'react-livestream'
 import { APIKEY } from "./ApiKey.js";
 import styled from 'styled-components'
+import { Button, Card, CardContent } from '@material-ui/core';
 
 const StyledIframeWrapper = styled.div`
   position: relative;
@@ -16,11 +17,8 @@ const StyledIframeWrapper = styled.div`
 `
 
 const StyledIframe = styled.iframe`
-  position: absolute;
-  top: 0;
-  left: 0;
+  height: 92.5%;
   width: 100%;
-  height: 100%;
 `
 
 function App() {
@@ -59,29 +57,49 @@ function App() {
 
   function OfflineComponent() {
     return (
-      <div>
-        <p>I am offline now, but checkout my stream on Fridays at 5 PM EST</p>
-      </div>
+      <Card style={{maxWidth: 625}} variant="elevation">
+        <CardContent>
+          <p>We are offline now, but we are live on Sundays at 10 AM EST. You can also view our past streams/service on our Youtube Channel here.</p>
+        </CardContent>
+      </Card>
     )
   }
 
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header> */}
-      {
-        isLive || youtubeVideoId !== "" ? (
-          <StyledIframeWrapper>
-            <StyledIframe
-              src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </StyledIframeWrapper>
-        ) : OfflineComponent() 
-      }
+      <header className="App-header">
+        <p style={{marginRight: 100}}>Bethel Baptist Church</p>
+        <Button href="#churchInfo" style={{color: "white"}}>Church Info</Button>
+        <Button href="#livestream" style={{color: "white"}}>Live Service</Button>
+        <Button href="#offering" style={{color: "white"}}>Offerings</Button>
+        <Button href="#contactInfo" style={{color: "white"}}>Contact Info</Button>
+      </header>
+      <div style={{height: 100}} />
+      <div id="churchInfo">
+
+      </div>
+      <div id="livestream">
+        {
+          isLive || youtubeVideoId !== "" ? (
+            <Card style={{width: "80%", height: 500}}>
+              <CardContent style={{height: "100%"}}>
+                <StyledIframe
+                  src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </CardContent>
+            </Card>
+          ) : OfflineComponent()
+        }
+      </div>
+      <div id="offering">
+
+      </div>
+      <div id="contactInfo">
+
+      </div>
     </div>
   );
 }
