@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   flex-direction: column;
   background-color: #00ffbf;
   min-height: 100vh;
@@ -8,6 +8,7 @@
 #livestream {
   justify-content: center;
   display: flex;
+  text-align: center;
 }
 
 .App-logo {

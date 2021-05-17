@@ -4,7 +4,7 @@ import React, {useEffect} from 'react'
 import ReactLivestream from 'react-livestream'
 import { APIKEY } from "./ApiKey.js";
 import styled from 'styled-components'
-import { Button, Card, CardContent } from '@material-ui/core';
+import { Button, Card, CardContent, CardHeader } from '@material-ui/core';
 
 const StyledIframeWrapper = styled.div`
   position: relative;
@@ -41,11 +41,12 @@ function App() {
       .then(async res => {
         const response = await res.json()
   
-        console.log(response)
-  
         // setYoutubeVideoId("awtmhTmK9Tk")
         if (response.items && response.items.length > 0) {
           const streamInfo = response.items[0]
+
+          console.log(streamInfo)
+
           setIsLive(true)
           setYoutubeVideoId(streamInfo.id.videoId)
         }
@@ -57,7 +58,8 @@ function App() {
 
   function OfflineComponent() {
     return (
-      <Card style={{maxWidth: 625}} variant="elevation">
+      <Card style={{width: "80%"}} variant="elevation">
+        <CardHeader title="Live Stream" />
         <CardContent>
           <p>We are offline now, but we are live on Sundays at 10 AM EST. You can also view our past streams/service on our Youtube Channel here.</p>
         </CardContent>
@@ -75,14 +77,27 @@ function App() {
         <Button href="#contactInfo" style={{color: "white"}}>Contact Info</Button>
       </header>
       <div style={{height: 100}} />
-      <div id="churchInfo">
-
+      <div id="churchInfo" 
+        style={{
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+          marginBottom: 10
+        }}
+      >
+        <Card style={{width: "80%"}}>
+          <CardHeader title="Church Information" style={{textAlign: "center"}}/>
+          <CardContent style={{flexDirection: "column",}}>
+            {/* <p>Church Info</p> */}
+          </CardContent>
+        </Card>
       </div>
       <div id="livestream">
         {
           isLive || youtubeVideoId !== "" ? (
-            <Card style={{width: "80%", height: 500}}>
-              <CardContent style={{height: "100%"}}>
+            <Card style={{width: "80%", height: 700}}>
+              <CardHeader title="Live Stream" />
+              <CardContent style={{height: "100%", marginTop: 10}}>
                 <StyledIframe
                   src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
                   frameBorder="0"
@@ -94,11 +109,36 @@ function App() {
           ) : OfflineComponent()
         }
       </div>
-      <div id="offering">
-
+      <div id="offering" 
+        style={{
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+          marginTop: 10,
+          marginBottom: 10
+        }}
+      >
+        <Card style={{width: "80%"}}>
+          <CardHeader title="Offerings" style={{textAlign: "center"}}/>
+          <CardContent style={{flexDirection: "column",}}>
+            <p>Zelle Information:</p>
+          </CardContent>
+        </Card>
       </div>
-      <div id="contactInfo">
-
+      <div id="contactInfo" 
+        style={{
+          justifyContent: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
+        <Card style={{width: "80%"}}>
+          <CardHeader title="Contact Information" style={{textAlign: "center"}}/>
+          <CardContent style={{flexDirection: "column",}}>
+            {/* <p>Contact Info section</p> */}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
